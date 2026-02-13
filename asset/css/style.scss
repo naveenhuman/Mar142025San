@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #ffe6f0;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.question {
+  margin: 30px 0;
+  text-align: left;
+}
+
+.question label {
+  display: block;
+  margin: 5px 0;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#quiz, #valentine, #retrySection {
+  max-width: 600px;
+  margin: auto;
+}
+
+#valentine {
+  position: relative;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+}
+
+#cryingGif {
+  width: 200px;
+  margin-top: 20px;
+}
+
+#yes {
+  background-color: pink;
+}
+
+#no {
+  background-color: lightgray;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+#result {
+  margin-top: 40px;
+  font-size: 22px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+#herImage {
+  display: none;
+  margin-top: 20px;
+  width: 250px;
+}
