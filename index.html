@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Be My Valentine?</title>
+  <title>Valentine Quiz</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;   /* vertical center */
-      align-items: center;       /* horizontal center */
-      height: 100vh;             /* full screen height */
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #ffe6f0;       /* light pink background */
-    }
-    h1 {
+      background: #ffe6f0;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      margin-bottom: 40px;
+    }
+    .question {
+      margin: 30px 0;
     }
     button {
-      padding: 15px 30px;
-      font-size: 18px;
-      margin: 20px;
+      padding: 10px 20px;
+      margin: 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
+    }
+    #quiz, #valentine, #retrySection {
+      max-width: 600px;
+      margin: auto;
+    }
+    #valentine, #retrySection {
+      display: none; /* hidden until needed */
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: red;
+    }
+    #cryingGif {
+      width: 200px;
+      margin-top: 20px;
     }
     #yes {
       background-color: pink;
@@ -33,31 +46,100 @@
       position: absolute;
       transition: all 0.3s ease;
     }
-    #message {
+    #result {
       margin-top: 40px;
       font-size: 22px;
       color: red;
       font-weight: bold;
       text-align: center;
-      width: 90%;          /* occupy 90% of phone width */
-      max-width: 600px;    /* optional limit for larger screens */
+      width: 90%;
+      max-width: 600px;
     }
   </style>
 </head>
 <body>
-  <h1>Will you be my Valentine? ❤️</h1>
-  <button id="yes">Yes</button>
-  <button id="no">No</button>
-  <div id="message"></div>
+
+  <!-- Quiz Section -->
+  <div id="quiz">
+    <h2>This message is for her, Only her</h2>
+    <p>Pass the test for message</p>
+
+    <div class="question">
+      <p>Q1. When is our first real meet?</p>
+      <label><input type="radio" name="q1" value="1"> 16.9.24</label><br>
+      <label><input type="radio" name="q1" value="2"> 14.2.25</label><br>
+      <label><input type="radio" name="q1" value="3"> 14.3.25</label><br>
+      <label><input type="radio" name="q1" value="4"> 13.4.25</label>
+    </div>
+
+    <div class="question">
+      <p>Q2. Reason for our 2nd meet?</p>
+      <label><input type="radio" name="q2" value="1"> Rock, paper, scissor</label><br>
+      <label><input type="radio" name="q2" value="2"> Game in phone</label><br>
+      <label><input type="radio" name="q2" value="3"> Ear ring</label><br>
+      <label><input type="radio" name="q2" value="4"> Bangle</label>
+    </div>
+
+    <div class="question">
+      <p>Q3. First thing purchased by you for me?</p>
+      <label><input type="radio" name="q3" value="1"> Shirt</label><br>
+      <label><input type="radio" name="q3" value="2"> Headphones</label><br>
+      <label><input type="radio" name="q3" value="3"> Slipper</label><br>
+      <label><input type="radio" name="q3" value="4"> Belt</label>
+    </div>
+
+    <button onclick="checkAnswers()">Submit</button>
+    <div id="message"></div>
+  </div>
+
+  <!-- Retry Section -->
+  <div id="retrySection">
+    <p>Oops! Wrong answers, try again ❤️</p>
+    <img id="cryingGif" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Baby crying">
+    <br>
+    <button onclick="retryQuiz()">Try Again</button>
+  </div>
+
+  <!-- Valentine Section -->
+  <div id="valentine">
+    <h1>Will you be my Valentine? ❤️</h1>
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+    <div id="result"></div>
+  </div>
 
   <script>
+    function checkAnswers() {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+
+      if (!q1 || !q2 || !q3) {
+        document.getElementById("message").innerHTML = "Please answer all questions!";
+        return;
+      }
+
+      if (q1.value === "3" && q2.value === "3" && q3.value === "1") {
+        document.getElementById("quiz").style.display = "none";
+        document.getElementById("valentine").style.display = "block";
+      } else {
+        document.getElementById("quiz").style.display = "none";
+        document.getElementById("retrySection").style.display = "block";
+      }
+    }
+
+    function retryQuiz() {
+      document.getElementById("retrySection").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+      document.getElementById("message").innerHTML = "";
+      // Reset answers
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    }
+
+    // Valentine page logic
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
-    const msg = document.getElementById("message");
-
-    // Initial position
-    noBtn.style.left = "50%";
-    noBtn.style.top = "200px";
+    const result = document.getElementById("result");
 
     function moveNoButton() {
       const x = Math.random() * (window.innerWidth - 120);
@@ -71,8 +153,9 @@
     noBtn.addEventListener("click", moveNoButton);
 
     yesBtn.addEventListener("click", () => {
-      msg.innerHTML = "Yay! ❤️ She said YES!";
+      result.innerHTML = "Yay! ❤️ She said YES!";
     });
   </script>
+
 </body>
 </html>
