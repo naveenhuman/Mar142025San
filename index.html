@@ -4,10 +4,18 @@
   <title>Be My Valentine?</title>
   <style>
     body {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;   /* vertical center */
+      align-items: center;       /* horizontal center */
+      height: 100vh;             /* full screen height */
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin-top: 100px;
-      overflow: hidden;
+      background: #ffe6f0;       /* light pink background */
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
     }
     button {
       padding: 15px 30px;
@@ -23,13 +31,16 @@
     #no {
       background-color: lightgray;
       position: absolute;
-      transition: all 0.3s ease; /* smooth movement */
+      transition: all 0.3s ease;
     }
     #message {
       margin-top: 40px;
       font-size: 22px;
       color: red;
       font-weight: bold;
+      text-align: center;
+      width: 90%;          /* occupy 90% of phone width */
+      max-width: 600px;    /* optional limit for larger screens */
     }
   </style>
 </head>
@@ -55,10 +66,9 @@
       noBtn.style.top = y + "px";
     }
 
-    // Run away BEFORE click/touch lands
-    noBtn.addEventListener("mouseenter", moveNoButton);   // desktop hover
-    noBtn.addEventListener("touchstart", moveNoButton);   // mobile touch
-    noBtn.addEventListener("click", moveNoButton);        // fallback
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
 
     yesBtn.addEventListener("click", () => {
       msg.innerHTML = "Yay! ❤️ She said YES!";
