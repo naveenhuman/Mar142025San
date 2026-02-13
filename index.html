@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Valentine Quiz</title>
@@ -12,6 +12,11 @@
     }
     .question {
       margin: 30px 0;
+      text-align: left; /* ensures all options align to the left */
+    }
+    .question label {
+      display: block;   /* each option on its own line */
+      margin: 5px 0;    /* consistent spacing */
     }
     button {
       padding: 10px 20px;
@@ -58,6 +63,11 @@
       width: 90%;
       max-width: 600px;
     }
+    #herImage {
+      display: none; /* hidden until Yes is clicked */
+      margin-top: 20px;
+      width: 250px;
+    }
   </style>
 </head>
 <body>
@@ -69,25 +79,25 @@
 
     <div class="question">
       <p>Q1. When is our first real meet?</p>
-      <label><input type="radio" name="q1" value="1"> 16.9.24</label><br>
-      <label><input type="radio" name="q1" value="2"> 14.2.25</label><br>
-      <label><input type="radio" name="q1" value="3"> 14.3.25</label><br>
+      <label><input type="radio" name="q1" value="1"> 16.9.24</label>
+      <label><input type="radio" name="q1" value="2"> 14.2.25</label>
+      <label><input type="radio" name="q1" value="3"> 14.3.25</label>
       <label><input type="radio" name="q1" value="4"> 13.4.25</label>
     </div>
 
     <div class="question">
       <p>Q2. Reason for our 2nd meet?</p>
-      <label><input type="radio" name="q2" value="1"> Rock, paper, scissor</label><br>
-      <label><input type="radio" name="q2" value="2"> Game in phone</label><br>
-      <label><input type="radio" name="q2" value="3"> Ear ring</label><br>
+      <label><input type="radio" name="q2" value="1"> Rock, paper, scissor</label>
+      <label><input type="radio" name="q2" value="2"> Game in phone</label>
+      <label><input type="radio" name="q2" value="3"> Ear ring</label>
       <label><input type="radio" name="q2" value="4"> Bangle</label>
     </div>
 
     <div class="question">
       <p>Q3. First thing purchased by you for me?</p>
-      <label><input type="radio" name="q3" value="1"> Shirt</label><br>
-      <label><input type="radio" name="q3" value="2"> Headphones</label><br>
-      <label><input type="radio" name="q3" value="3"> Slipper</label><br>
+      <label><input type="radio" name="q3" value="1"> Shirt</label>
+      <label><input type="radio" name="q3" value="2"> Headphones</label>
+      <label><input type="radio" name="q3" value="3"> Slipper</label>
       <label><input type="radio" name="q3" value="4"> Belt</label>
     </div>
 
@@ -109,6 +119,8 @@
     <button id="yes">Yes</button>
     <button id="no">No</button>
     <div id="result"></div>
+    <!-- Her image (upload to repo under images/herphoto.jpg) -->
+    <img id="herImage" src="Pictures/her.jpeg" alt="Her photo">
   </div>
 
   <script>
@@ -143,6 +155,7 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const result = document.getElementById("result");
+    const herImage = document.getElementById("herImage");
 
     function moveNoButton() {
       const x = Math.random() * (window.innerWidth - 120);
@@ -157,6 +170,7 @@
 
     yesBtn.addEventListener("click", () => {
       result.innerHTML = "Yay! ❤️ She said YES!";
+      herImage.style.display = "block"; // show her image
     });
   </script>
 
